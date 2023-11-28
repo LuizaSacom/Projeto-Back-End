@@ -1,24 +1,13 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const armaSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  damage: {
-    type: Number,
-    required: true,
-  },
-  accuracy: { //precisão
-    type: Number,
-    required: true,
-  },
-});
+  id: {type: mongoose.Schema.Types.ObjectId},
+  nome: {type: String, require: true}, //é obrigatório
+  tipo: {type: String},
+  dano: {type: Number},
+  precisao: {type: Number}
+}, {versionKey: false});
 
-const Arma = mongoose.model('Arma', armaSchema);
+const Arma = mongoose.model("Arma", armaSchema);
 
-module.exports = Arma;
+export {Arma, armaSchema};

@@ -1,8 +1,9 @@
 import express from "express";
-import adminController from '../controllers/adminController.js';
-const { check } = require('express-validator');
+import AdminController from "../controllers/adminController.js";
+
 const router = express.Router();
 
+/*
 router.post(  // Rota permitida apenas para administradores, mas ainda todos conseguem acessar
   '/create-admin',
   [
@@ -15,6 +16,6 @@ router.post(  // Rota permitida apenas para administradores, mas ainda todos con
 router.delete( // Rota permitida apenas para administradores, mas ainda todos conseguem acessar
   '/delete-user/:id',
   adminController.deleteNonAdminUser
-);
+); */
 
 module.exports = router;

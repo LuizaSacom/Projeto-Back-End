@@ -1,15 +1,12 @@
 import express from "express";
-import usuarioController from '../controllers/usuarioController.js';
+import UsuarioController from "../controllers/usuarioController.js";
+
 const router = express.Router();
 
-// Rotas que devem ser públicas públicas
-router.post('/register', usuarioController.registerUsuario);
-router.post('/login', usuarioController.loginUsuario);
+router.get("/Usuario", UsuarioController.listarUsuarios);
+router.get("/Usuario/:id", UsuarioController.listarUsuarioPorId);
+router.post("/Usuario", UsuarioController.cadastrarUsuario);
+router.put("/Usuario/:id", UsuarioController.atualizarUsuario);
+router.delete("/Usuario/:id", UsuarioController.excluirUsuario);
 
-// Rotas que precisam ser protegidas por autenticação
-router.get('/', usuarioController.getUsuarios);
-router.get('/:id', usuarioController.getUsuarioById);
-router.put('/:id', usuarioController.updateUsuario);
-router.delete('/:id', usuarioController.deleteUsuario);
-
-module.exports = router;
+export default router;

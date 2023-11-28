@@ -1,6 +1,20 @@
-const Usuario = require('../models/Usuarios.js');
-const { validationResult } = require('express-validator');
+import Usuario from "../models/Usuarios.js";
 
+class AdminController {
+  static async listarAdmin (req, res) { //asyns se conecta com o banco
+    try{
+        const listaAdmin = await admin.find({}); //vai encontrar todos pois não passou parametro
+        res.status(200).json(listaAdmin);
+    }catch (erro){
+        res.status(500).json({message: `${erro.message} - falha na requisição`});
+    }
+  }
+
+  
+}
+export default AdminController;
+
+/*
 exports.createAdmin = async (req, res, next) => {  // Rota para criar um novo administrador
   if (!req.usuario.isAdmin) {  // Verifica se o usuário autenticado é um administrador
     return res.status(403).json({ error: 'Somente administradores podem criar administradores' });
@@ -48,4 +62,4 @@ exports.deleteNonAdminUsuario = async (req, res, next) => {  // Rota para exclui
     console.error(error);
     res.status(500).json({ error: 'Erro no servior' });
   }
-};
+}; */

@@ -1,31 +1,12 @@
 import express from "express";
-import habilidadeController from '../controllers/habilidadeController.js';
-const { check } = require('express-validator');
+import HabilidadeController from "../controllers/habilidadeController.js";
+
 const router = express.Router();
 
-router.get('/', habilidadeController.getHabilidades); // Rota deve estar protegida por autenticação
-router.get('/:id', habilidadeController.getHabilidadeById);
+router.get("/Habilidade", HabilidadeController.listarHabilidades);
+router.get("/Habilidade/:id", HabilidadeController.listarHabilidadePorId);
+router.post("/Habilidade", HabilidadeController.cadastrarHabilidade);
+router.put("/Habilidade/:id", HabilidadeController.atualizarHabilidade);
+router.delete("/Habilidade/:id", HabilidadeController.excluirHabilidade);
 
-router.post( // Rota deve estar protegida por autenticação e permitida apenas para administradores
-  '/',
-  [
-    check('name', 'Name is required').not().isEmpty(),
-    check('description', 'Description is required').not().isEmpty(),
-    check('damage', 'Damage must be a valid number').isNumeric(),
-  ],
-  habilidadeController.createHabilidade
-);
-
-router.put( // Rota deve estar protegida por autenticação e permitida apenas para administradores
-  '/:id',
-  [
-    check('name', 'Name is required').not().isEmpty(),
-    check('description', 'Description is required').not().isEmpty(),
-    check('damage', 'Damage must be a valid number').isNumeric(),
-  ],
-  habilidadeController.updateHabilidade
-);
-
-router.delete('/:id', habilidadeController.deleteHabilidade); // Rota deve estar protegida por autenticação e permitida apenas para administradores
-
-module.exports = router;
+export default router;

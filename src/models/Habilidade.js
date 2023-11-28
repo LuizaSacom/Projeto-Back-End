@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const habilidadeSchema = new mongoose.Schema({
   name: {
@@ -15,6 +15,6 @@ const habilidadeSchema = new mongoose.Schema({
   },
 });
 
-const Habilidade = mongoose.model('Habilidade', habilidadeSchema);
+const Habilidade = mongoose.model("Habilidade", habilidadeSchema);
 
-module.exports = Habilidade;
+export {Habilidade, habilidadeSchema};

@@ -1,21 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const personagemSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    required: true,
-  },
-  arma: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Arma',
-    required: true,
-  },
-});
+  id: {type: mongoose.Schema.Types.ObjectId},
+  nome: {type: String, require: true}, //é obrigatório
+  habilidades: {type: String},
+  nacionalidade: {type: mongoose.Schema.Types.ObjectId},
+  descricao: {type: String},
+  funcao: {type: mongoose.Schema.Types.ObjectId}
+}, {versionKey: false});
 
-const Personagem = mongoose.model('Personagem', personagemSchema);
+const Personagem = mongoose.model("Personagem", personagemSchema);
 
-module.exports = Personagem;
+export {Personagem, personagemSchema};

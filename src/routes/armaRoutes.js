@@ -1,33 +1,12 @@
 import express from "express";
-import armaController from '../controllers/armaController.js';
-const { check } = require('express-validator');
+import ArmaController from '../controllers/armaController.js';
+
 const router = express.Router();
 
-router.get('/', armaController.getArmas);
-router.get('/:id', armaController.getArmaById);
+router.get("/Arma", ArmaController.listarArmas);
+router.get("/Arma/:id", ArmaController.listarArmaPorId);
+router.post("/Arma", ArmaController.cadastrarArma);
+router.put("/Arma/:id", ArmaController.atualizarArma);
+router.delete("/Arma/:id", ArmaController.excluirArma);
 
-router.post( // Rota deve estar protegida por autenticação e permitida apenas para administradores
-  '/',
-  [
-    check('name', 'Name is required').not().isEmpty(),
-    check('type', 'Type is required').not().isEmpty(),
-    check('damage', 'Damage must be a valid number').isNumeric(),
-    check('accuracy', 'Accuracy must be a valid number').isNumeric(),
-  ],
-  armaController.createArma
-);
-
-router.put( // Rota deve estar protegida por autenticação e permitida apenas para administradores
-  '/:id',
-  [
-    check('name', 'Name is required').not().isEmpty(),
-    check('type', 'Type is required').not().isEmpty(),
-    check('damage', 'Damage must be a valid number').isNumeric(),
-    check('accuracy', 'Accuracy must be a valid number').isNumeric(),
-  ],
-  armaController.updateArma
-);
-
-router.delete('/:id', armaController.deleteArma); // Rota deve estar protegida por autenticação e permitida apenas para administradores
-
-module.exports = router;
+export default router;

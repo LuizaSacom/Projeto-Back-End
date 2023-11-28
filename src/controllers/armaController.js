@@ -1,85 +1,55 @@
-const Arma = require('../models/Arma.js');
-const { validationResult } = require('express-validator');
+import { Arma } from "../models/Arma.js";
 
-exports.getArmas = async (req, res, next) => {  // Rota para listar todas as armas com paginação
-  try {
-    const { page = 1, limit = 5 } = req.query;
-    const armas = await Arma.find()
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit));
-    res.status(200).json(armas);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro no servidor' });
-  }
-};
-
-exports.getArmaById = async (req, res, next) => {  // Rota para obter informações de uma arma pelo ID
-  try {
-    const arma = await Arma.findById(req.params.id);
-    if (!arma) {
-      return res.status(404).json({ error: 'Arma não encontrada' });
+class ArmaController{
+  static async listarArmas (req, res) { //asyns se conecta com o banco //getArmas
+    try{
+      const { page = 1, limit = 5 } = req.query;
+      const armas = await Arma.find()
+        .skip((page - 1) * limit)
+        .limit(parseInt(limit));
+      res.status(200).json(armas);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({message: `${error.message} - falha na requisição`});
     }
-    res.status(200).json(arma);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro no servidor' });
-  }
-};
-
-exports.createArma = async (req, res, next) => {  // Rota para cadastrar uma nova arma
-  const errors = validationResult(req);  // Validação dos dados da arma usando express-validator
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  const { name, type, damage, accuracy } = req.body;
-  try {
-    const arma = new Arma({  // Cria uma nova arma
-      name,
-      type,
-      damage,
-      accuracy,
-    });
-    await arma.save();  // Salva a arma no banco de dados
-    res.status(201).json(arma);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro no servidor' });
-  }
-};
-
-exports.updateArma = async (req, res, next) => {  // Rota para atualizar os dados de uma arma
-  const { name, type, damage, accuracy } = req.body;
-  try {  // Verifica se a arma existe
-    let arma = await Arma.findById(req.params.id);
-    if (!arma) {
-      return res.status(404).json({ error: 'Arma não encontrada' });
-    }
-    arma.name = name || arma.name;  // Atualiza os dados da arma
-    arma.type = type || arma.type;
-    arma.damage = damage || arma.damage;
-    arma.accuracy = accuracy || arma.accuracy;
+  };
     
-    await arma.save(); // Salva as alterações no banco de dados
-    res.status(200).json(arma);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro no servidor' });
-  }
-};
-
-exports.deleteArma = async (req, res, next) => { // Rota para excluir uma arma
-  try {  // Verifica se a arma existe
-    const arma = await Arma.findById(req.params.id);
-    if (!arma) {
-      return res.status(404).json({ error: 'Arma não encontrada' });
+  static async listarArmaPorId (req, res) { //getArmaById
+    try{
+        const id = req.params.id;
+        const armaEncontrado = await Arma.findById(id); //vai encontrar todos pois não passou parametro
+        res.status(200).json(armaEncontrado);
+    }catch (erro){
+        res.status(500).json({message: `${erro.message} - falha na requisição da arma`});
     }
+  };
 
-    await arma.remove(); // Exclui a arma do banco de dados
+  static async cadastrarArma (req, res) { //createArma
+    try{
+        const novaArma = await Arma.create(req.body);   //passa a criar
+        res.status(201).json({ message: "Criado com sucesso!", arma: novaArma });
+    }catch (erro){
+        res.status(500).json({ message: `${erro.message} - falha ao cadastrar arma`});
+    }
+  };
 
-    res.status(204).json();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro no servidor' });
-  }
-};
+  static async atualizarArma (req, res) { //updateArma
+    try{
+        const id = req.params.id;
+        await Arma.findByIdAndUpdate(id, req.body);
+        res.status(200).json({message: "Arma atualizada!"});
+    }catch (erro){
+        res.status(500).json({message: `${erro.message} - falha na atualização da arma`});
+    }
+  };
+  static async excluirArma (req, res) {
+    try{
+        const id = req.params.id;
+        await Arma.findByIdAndDelete(id);
+        res.status(200).json({message: "Arma excluida!"});
+    }catch (erro){
+        res.status(500).json({message: `${erro.message} - falha na exclusão da arma`});
+    }
+  };
+}
+export default ArmaController;
