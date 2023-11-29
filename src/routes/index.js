@@ -1,7 +1,7 @@
 import express from "express";
 import Usuario from "./usuarioRoutes.js";
 import Arma from "./armaRoutes.js";
-import Habilidade from "./habilidadeRoutes.js";
+import Habilidade from "./funcaoRoutes.js";
 import Mapa from "./mapaRoutes.js";
 import Personagem from "./personagemRoutes.js";
 
