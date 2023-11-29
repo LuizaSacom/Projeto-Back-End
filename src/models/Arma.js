@@ -10,4 +10,4 @@ const armaSchema = new mongoose.Schema({
 
 const Arma = mongoose.model("Arma", armaSchema);
 
-export {Arma, armaSchema};
+export default Arma;

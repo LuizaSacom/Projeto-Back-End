@@ -1,4 +1,4 @@
-import { Arma } from "../models/Arma.js";
+import Arma from "../models/Arma.js";
 
 class ArmaController{
   static async listarArmas (req, res) { //asyns se conecta com o banco //getArmas

@@ -1,4 +1,6 @@
-import { Personagem } from "../models/Personagem.js";
+import Personagem from "../models/Personagem.js";
+import { Funcao } from "../models/Funcao.js";
+import { Nacionalidade } from "../models/Nacionalidade.js";
 
 class PersonagemController { //classe
   static async listarPersonagens (req, res) { //asyns se conecta com o banco
@@ -23,14 +25,21 @@ class PersonagemController { //classe
       }
   };
 
-  static async cadastrarPersonagem (req, res) {
+  static async cadastrarPersonagem (req, res) { /************************************* */
+      const novoPersonagem = req.body;
+
       try{
-          const novoPersonagem = await Personagem.create(req.body);   //passa a criar
-          res.status(201).json({ message: "Criado com sucesso!", personagem: novoPersonagem });
+          const funcaoEncontrada = await Funcao.findById(novoPersonagem.Funcao);
+          const nacionalidadeEncontrado = await Nacionalidade.findById(novoPersonagem.Nacionalidade);
+          const personagemCompleto = { ...novoPersonagem, funcao: { ...funcaoEncontrada._doc}, nacionalidade: { ...nacionalidadeEncontrado._doc }};
+          const personagemCriado = await Personagem.create(personagemCompleto);
+          res.status(201).json({ message: "Criado com sucesso!", personagem: personagemCriado });
       }catch (erro){
           res.status(500).json({ message: `${erro.message} - falha ao cadastrar personagem`});
       }
   };
+
+
   static async atualizarPersonagem (req, res) {
       try{
           const id = req.params.id;

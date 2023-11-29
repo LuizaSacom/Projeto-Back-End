@@ -1,4 +1,4 @@
-import { Mapa } from "../models/Mapa.js";
+import Mapa from "../models/Mapa.js";
 
 class MapaController{
   static async listarMapas (req, res) { //asyns se conecta com o banco
