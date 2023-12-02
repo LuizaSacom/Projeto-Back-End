@@ -2,7 +2,7 @@ import express from "express";                                     //o mongo é 
 import conectaNaDataBase from "./config/dbConnect.js";
 import routes from "./routes/index.js";
 
-const conexao = await conectaNaDataBase();
+const conexao = await conectaNaDataBase(); //precisa do await pq é assincrono
 
 conexao.on("error", (erro) => {
     console.error("Erro de conexão", erro);
