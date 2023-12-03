@@ -58,6 +58,15 @@ class PersonagemController { //classe
           res.status(500).json({message: `${erro.message} - falha na exclusão do personagem`});
       }
   };
+  static async listarPersonagensPorFuncao (req, res){ //função de busca por parâmetro
+    const Funcao = req.query.funcao;
+    try{
+        const personagensPorFuncao = await Personagem.find({ funcao: Funcao});
+        res.status(200).jason(personagensPorFuncao);
+    }catch(erro){
+        res.status(500).json({ message: `${erro.message} - falha na busca `});
+    }
+  };
 };
 
 export default PersonagemController;
