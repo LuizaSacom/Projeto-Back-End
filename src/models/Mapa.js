@@ -6,6 +6,6 @@ const mapaSchema = new mongoose.Schema({
   descricao: {type: String}
 }, {versionKey: false});
 
-const Mapa = mongoose.model("Mapa", mapaSchema);
+const mapa = mongoose.model("mapa", mapaSchema);
 
-export default Mapa;
+export default mapa;

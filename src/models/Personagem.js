@@ -11,6 +11,6 @@ const personagemSchema = new mongoose.Schema({
   funcao: funcaoSchema
 }, {versionKey: false});
 
-const Personagem = mongoose.model("Personagem", personagemSchema);
+const personagem = mongoose.model("personagem", personagemSchema);
 
-export default Personagem;
+export default personagem;

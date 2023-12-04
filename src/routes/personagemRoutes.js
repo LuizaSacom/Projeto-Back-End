@@ -3,11 +3,11 @@ import PersonagemController from "../controllers/personagemController.js";
 
 const router = express.Router();
 
-router.get("/Personagem", PersonagemController.listarPersonagens);
-router.get("/Personagem/busca", PersonagemController.listarPersonagensPorFuncao);
-router.get("/Personagem/:id", PersonagemController.listarPersonagemPorId);
-router.post("/Personagem", PersonagemController.cadastrarPersonagem);
-router.put("/Personagem/:id", PersonagemController.atualizarPersonagem);
-router.delete("/Personagem/:id", PersonagemController.excluirPersonagem);
+router.get("/personagem", PersonagemController.listarPersonagens);
+router.get("/personagem/busca", PersonagemController.listarPersonagensPorFuncao);
+router.get("/personagem/:id", PersonagemController.listarPersonagemPorId);
+router.post("/personagem", PersonagemController.cadastrarPersonagem);
+router.put("/personagem/:id", PersonagemController.atualizarPersonagem);
+router.delete("/personagem/:id", PersonagemController.excluirPersonagem);
 
 export default router;

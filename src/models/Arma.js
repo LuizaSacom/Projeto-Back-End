@@ -8,6 +8,6 @@ const armaSchema = new mongoose.Schema({
   precisao: {type: Number}
 }, {versionKey: false});
 
-const Arma = mongoose.model("Arma", armaSchema);
+const arma = mongoose.model("arma", armaSchema);
 
-export default Arma;
+export default arma;
