@@ -3,13 +3,13 @@ import swaggerAutogen from 'swagger-autogen';
 const swagger = swaggerAutogen();
 
 const output = './swagger_doc.json'
-const endpoints = ['./src/routes/personagemRoutes.js' , './src/routes/armaRoutes.js', './src/routes/mapaRoutes.js', './src/routes/nacionalidadeRoutes.js' , './src/routes/funcaoRoutes.js']
+const endpoints = ['./src/routes/personagemRoutes.js' , './src/routes/armaRoutes.js', './src/routes/mapaRoutes.js', './src/routes/nacionalidadeRoutes.js' , './src/routes/funcaoRoutes.js, ./src/routes/authRoutes.js']
 
 
 const doc = {
     info: {
-      version: '',      // by default: '1.0.0'
-      title: '',        // by default: 'REST API'
+      version: '1.0',      // by default: '1.0.0'
+      title: 'API VALORANT',        // by default: 'REST API'
       description: '',  // by default: ''
     },
     host: '',      // by default: 'localhost:3000'
