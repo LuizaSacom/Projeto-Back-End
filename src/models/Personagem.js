@@ -3,14 +3,13 @@ import { funcaoSchema } from "./Funcao.js";
 import { nacionalidadeSchema } from "./Nacionalidade.js";
 
 const personagemSchema = new mongoose.Schema({
-  id: {type: mongoose.Schema.Types.ObjectId},
-  nome: {type: String, require: true}, //é obrigatório
-  habilidades: {type: String},
-  nacionalidade: nacionalidadeSchema,
-  descricao: {type: String},
-  funcao: funcaoSchema
-}, {versionKey: false});
+  id: { type: mongoose.Schema.Types.ObjectId },
+  nome: { type: String, required: true }, // é obrigatório
+  nacionalidade: { type: mongoose.Schema.Types.ObjectId, ref: 'Nacionalidade' },
+  descricao: { type: String },
+  funcao: { type: mongoose.Schema.Types.ObjectId, ref: 'Funcao' }
+}, { versionKey: false });
 
-const personagem = mongoose.model("personagem", personagemSchema);
+const Personagem = mongoose.model("Personagem", personagemSchema);
 
-export default personagem;
+export default Personagem;

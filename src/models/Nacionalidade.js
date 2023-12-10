@@ -5,6 +5,6 @@ const nacionalidadeSchema = new mongoose.Schema({
   origem: {type: String, require: true} //é obrigatório
 }, {versionKey: false});
 
-const nacionalidade = mongoose.model("nacionalidade", nacionalidadeSchema);
+const Nacionalidade = mongoose.model("Nacionalidade", nacionalidadeSchema);
 
-export {nacionalidade, nacionalidadeSchema};
+export {Nacionalidade, nacionalidadeSchema};

@@ -6,6 +6,6 @@ const funcaoSchema = new mongoose.Schema({
   descricao: {type: String}
 }, {versionKey: false});
 
-const funcao = mongoose.model("funcao", funcaoSchema);
+const Funcao = mongoose.model("Funcao", funcaoSchema);
 
-export {funcao, funcaoSchema};
+export {Funcao, funcaoSchema};
